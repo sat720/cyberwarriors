@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Styles */
+@layer base {
+  body {
+    @apply bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900;
+    @apply text-white min-h-screen;
+    font-family:
+      "Inter",
+      system-ui,
+      -apple-system,
+      sans-serif;
+  }
+}
+
+@layer components {
+  /* Glassmorphism effect */
+  .glass {
+    @apply bg-white/10 backdrop-blur-lg border border-white/20;
+  }
+
+  /* Card styling */
+  .card {
+    @apply glass rounded-xl p-6 shadow-2xl;
+  }
+
+  /* Button styling */
+  .btn {
+    @apply px-6 py-3 rounded-lg font-semibold transition-all duration-300;
+    @apply hover:scale-105 active:scale-95;
+  }
+
+  .btn-primary {
+    @apply bg-gradient-to-r from-indigo-500 to-purple-600;
+    @apply hover:from-indigo-600 hover:to-purple-700;
+    @apply shadow-lg shadow-indigo-500/50;
+  }
+
+  .btn-danger {
+    @apply bg-gradient-to-r from-red-500 to-pink-600;
+    @apply hover:from-red-600 hover:to-pink-700;
+    @apply shadow-lg shadow-red-500/50;
+  }
+
+  .btn-warning {
+    @apply bg-gradient-to-r from-amber-500 to-orange-600;
+    @apply hover:from-amber-600 hover:to-orange-700;
+    @apply shadow-lg shadow-amber-500/50;
+  }
+
+  .btn-success {
+    @apply bg-gradient-to-r from-emerald-500 to-green-600;
+    @apply hover:from-emerald-600 hover:to-green-700;
+    @apply shadow-lg shadow-emerald-500/50;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-slate-800/50;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-indigo-500/50 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-indigo-500;
+}
+
+/* Animations */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-in {
+  animation: slideIn 0.5s ease-out;
+}
