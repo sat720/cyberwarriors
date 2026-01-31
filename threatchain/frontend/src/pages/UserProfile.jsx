@@ -9,10 +9,17 @@ const UserProfile = () => {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    loadUserData();
+    loadUserData(); // Initial load
+
+    // Auto-refresh every 3 seconds to catch live risk score updates
+    const interval = setInterval(() => {
+      loadUserData(true); // true = silent background update
+    }, 3000);
+
+    return () => clearInterval(interval);
   }, []);
 
-  const loadUserData = async () => {
+  const loadUserData = async (isBackground = false) => {
     try {
       // Get user from localStorage
       const currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -29,9 +36,10 @@ const UserProfile = () => {
         setUserData(result.user);
       }
     } catch (error) {
-      setError(error.response?.data?.error || error.message);
+      // Only show error on full load, not background refresh
+      if (!isBackground) setError(error.response?.data?.error || error.message);
     } finally {
-      setLoading(false);
+      if (!isBackground) setLoading(false);
     }
   };
 

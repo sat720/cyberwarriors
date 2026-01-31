@@ -3,7 +3,13 @@ import {
   simulateBruteForce,
   simulateOTPFlood,
   simulateResetAbuse,
-  simulateRequestFlood,
+  simulateRequestFlooding,
+  simulateImpossibleTravel,
+  simulateTorConnection,
+  simulateSuspiciousTime,
+  simulateMaliciousPayload,
+  simulateXSS,
+  simulateRansomware,
   clearAllData
 } from '../api/api';
 
@@ -130,7 +136,7 @@ const TestButtons = ({ onTestComplete }) => {
 
         {/* Request Flood Button */}
         <button
-          onClick={() => handleTest(simulateRequestFlood, 'request-flood')}
+          onClick={() => handleTest(simulateRequestFlooding, 'request-flood')}
           disabled={loading !== null}
           className="btn btn-danger flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
         >
@@ -142,6 +148,114 @@ const TestButtons = ({ onTestComplete }) => {
           ) : (
             <>
               🔴 Request Flooding
+            </>
+          )}
+        </button>
+
+        {/* Impossible Travel Button */}
+        <button
+          onClick={() => handleTest(simulateImpossibleTravel, 'impossible-travel')}
+          disabled={loading !== null}
+          className="btn btn-danger flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {loading === 'impossible-travel' ? (
+            <>
+              <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+              Thinking...
+            </>
+          ) : (
+            <>
+              ✈️ Impossible Travel
+            </>
+          )}
+        </button>
+
+        {/* Tor Connection Button */}
+        <button
+          onClick={() => handleTest(simulateTorConnection, 'tor-connection')}
+          disabled={loading !== null}
+          className="btn btn-warning flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {loading === 'tor-connection' ? (
+            <>
+              <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+              Thinking...
+            </>
+          ) : (
+            <>
+              🕵️ Tor Connection
+            </>
+          )}
+        </button>
+
+        {/* Suspicious Time Button */}
+        <button
+          onClick={() => handleTest(simulateSuspiciousTime, 'suspicious-time')}
+          disabled={loading !== null}
+          className="btn bg-indigo-600 hover:bg-indigo-700 text-white flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {loading === 'suspicious-time' ? (
+            <>
+              <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+              Thinking...
+            </>
+          ) : (
+            <>
+              🌙 Suspicious Time
+            </>
+          )}
+        </button>
+
+        {/* Malicious Payload Button */}
+        <button
+          onClick={() => handleTest(simulateMaliciousPayload, 'malicious-payload')}
+          disabled={loading !== null}
+          className="btn bg-red-600 hover:bg-red-700 text-white flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {loading === 'malicious-payload' ? (
+            <>
+              <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+              Injecting...
+            </>
+          ) : (
+            <>
+              🦠 Malicious Payload
+            </>
+          )}
+        </button>
+
+        {/* XSS Attack Button */}
+        <button
+          onClick={() => handleTest(simulateXSS, 'xss')}
+          disabled={loading !== null}
+          className="btn bg-purple-600 hover:bg-purple-700 text-white flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {loading === 'xss' ? (
+            <>
+              <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+              Compromising...
+            </>
+          ) : (
+            <>
+              🎭 XSS Attack
+            </>
+          )}
+        </button>
+
+        {/* Ransomware Button */}
+        <button
+          onClick={() => handleTest(simulateRansomware, 'ransomware')}
+          disabled={loading !== null}
+          className="btn bg-pink-600 hover:bg-pink-700 text-white flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {loading === 'ransomware' ? (
+            <>
+              <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+              Encrypting...
+            </>
+          ) : (
+            <>
+              🔒 Ransomware
             </>
           )}
         </button>

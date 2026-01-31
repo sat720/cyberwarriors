@@ -35,8 +35,38 @@ export const simulateResetAbuse = async () => {
   return response.data;
 };
 
-export const simulateRequestFlood = async () => {
+export const simulateRequestFlooding = async () => {
   const response = await api.post('/api/test/request-flood');
+  return response.data;
+};
+
+export const simulateImpossibleTravel = async () => {
+  const response = await api.post('/api/test/impossible-travel');
+  return response.data;
+};
+
+export const simulateTorConnection = async () => {
+  const response = await api.post('/api/test/tor-connection');
+  return response.data;
+};
+
+export const simulateSuspiciousTime = async () => {
+  const response = await api.post('/api/test/suspicious-time');
+  return response.data;
+};
+
+export const simulateMaliciousPayload = async () => {
+  const response = await api.post('/api/test/malicious-payload');
+  return response.data;
+};
+
+export const simulateXSS = async () => {
+  const response = await api.post('/api/test/xss');
+  return response.data;
+};
+
+export const simulateRansomware = async () => {
+  const response = await api.post('/api/test/ransomware');
   return response.data;
 };
 

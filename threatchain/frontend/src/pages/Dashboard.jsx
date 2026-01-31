@@ -123,21 +123,12 @@ const Dashboard = () => {
         <p className="text-xl text-gray-300 mb-2">
           Real-time Cyber Threat Detection System
         </p>
-        <p className="text-sm text-gray-400">
-          Powered by AI Detection + Blockchain Evidence Storage
-        </p>
+
         
         {/* Status Badge */}
-        <div className="mt-4 flex flex-wrap justify-center gap-4">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/20 border border-green-500/50">
-            <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
-            <span className="text-sm text-green-300 font-semibold">System Online</span>
-          </div>
-          
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/20 border border-blue-500/50">
-             <span className="text-lg">⛓️</span>
-             <span className="text-sm text-blue-300 font-semibold">Blockchain Secured</span>
-          </div>
+        <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/20 border border-green-500/50">
+          <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
+          <span className="text-sm text-green-300 font-semibold">System Online</span>
         </div>
 
         {/* Admin Controls */}

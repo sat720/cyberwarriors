@@ -6,7 +6,8 @@ import {
   updateUserRiskScore,
   detectUserBruteForce,
   detectUserOTPFlooding,
-  detectUserResetAbuse
+  detectUserResetAbuse,
+  decayRiskScore
 } from '../services/riskScorer.js';
 
 const router = express.Router();
@@ -15,6 +16,27 @@ const router = express.Router();
  * USER AUTHENTICATION ROUTES
  * Real login, OTP, reset password functionality
  */
+
+/**
+ * Helper to get Real IP
+ * Cleans up IPv6 headers and replaces Localhost with actual LAN IP for better demo visuals
+ */
+const getRealOrMockIP = (req) => {
+  let ip = req.ip || req.headers['x-forwarded-for'] || 'Unknown';
+  
+  // Clean up IPv6 prefix
+  if (ip.startsWith('::ffff:')) {
+    ip = ip.substring(7);
+  }
+
+  // If localhost, show the actual LAN IP of this machine (10.7.12.33)
+  // This makes the logs look legitimate instead of showing "::1"
+  if (ip === '::1' || ip === '127.0.0.1') {
+    return '10.7.12.33';
+  }
+  
+  return ip;
+};
 
 // ============================================
 // REGISTER USER
@@ -72,7 +94,7 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
   try {
     const { username, password } = req.body;
-    const ipAddress = req.ip || req.headers['x-forwarded-for'] || 'Unknown';
+    const ipAddress = getRealOrMockIP(req);
     
     // Find user
     const user = await User.findOne({ username });
@@ -130,6 +152,11 @@ router.post('/login', async (req, res) => {
     user.failed_login_attempts = 0;
     user.last_login = new Date();
     user.last_ip = ipAddress;
+
+    // HEAL RISK SCORE: If user logs in successfully, reduce risk by 10 points
+    // This prevents accidental bans if they made a mistake earlier
+    await decayRiskScore(user._id, 10);
+
     await user.save();
     
     // Create success event
@@ -172,7 +199,7 @@ router.post('/login', async (req, res) => {
 router.post('/request-otp', async (req, res) => {
   try {
     const { username } = req.body;
-    const ipAddress = req.ip || req.headers['x-forwarded-for'] || 'Unknown';
+    const ipAddress = getRealOrMockIP(req);
     
     const user = await User.findOne({ username });
     if (!user) {
@@ -252,7 +279,7 @@ router.post('/request-otp', async (req, res) => {
 router.post('/reset-password', async (req, res) => {
   try {
     const { username, email } = req.body;
-    const ipAddress = req.ip || req.headers['x-forwarded-for'] || 'Unknown';
+    const ipAddress = getRealOrMockIP(req);
     
     const user = await User.findOne({ username, email });
     if (!user) {

@@ -10,7 +10,7 @@ const eventSchema = new mongoose.Schema({
   type: {
     type: String,
     required: true,
-    enum: ['login_attempt', 'otp_request', 'reset_request', 'api_request']
+    enum: ['login_attempt', 'otp_request', 'reset_request', 'api_request', 'tor_connection', 'file_upload']
   },
   
   // IP address of the attacker/user

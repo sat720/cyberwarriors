@@ -10,7 +10,7 @@ const alertSchema = new mongoose.Schema({
   threat_type: {
     type: String,
     required: true,
-    enum: ['BRUTE_FORCE', 'OTP_FLOODING', 'RESET_ABUSE', 'REQUEST_FLOODING', 'SUSPICIOUS_ACTIVITY']
+    enum: ['BRUTE_FORCE', 'OTP_FLOODING', 'RESET_ABUSE', 'REQUEST_FLOODING', 'SUSPICIOUS_ACTIVITY', 'IMPOSSIBLE_TRAVEL', 'TOR_IP_DETECTED', 'SUSPICIOUS_TIME', 'MALICIOUS_PAYLOAD', 'XSS_ATTACK', 'RANSOMWARE_DETECTED']
   },
   
   // How serious is this attack?
